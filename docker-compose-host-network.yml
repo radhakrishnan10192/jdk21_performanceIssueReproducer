@@ -1,0 +1,7 @@
+version: '2.2'
+services:
+  mainServer:
+    network_mode: host
+
+  downStreamServer:
+    network_mode: host

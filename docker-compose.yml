@@ -1,0 +1,23 @@
+version: '2.2'
+services:
+  mainServer:
+    container_name: testserv
+    image: <image>
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - JVM_ARGS=
+      - APP_ARGS=mainServer
+    depends_on:
+      - downStreamServer
+
+  downStreamServer:
+    container_name: mockserv
+    image: <image>
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      - JVM_ARGS=
+      - APP_ARGS=downStreamServer
