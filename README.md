@@ -4,7 +4,7 @@
 We have performed performance testing with a build between  java 17 and  java 21. From the  results we have observed the degradation in JDK21 for a particular scenario which is writing a high payload in async mode.
 
 ```
-5-10-100000-Async [5 dow stream calls , 10 ms delay, 100000 byte data]
+5-10-100000-Async [5 down stream calls , 10 ms delay, 100000 byte data]
     Metric             Current(ms)    Baseline(ms)         Variance      Tolerance
     50% Line                 137.0           120.0           14.2 %          1.0 %
     75% Line                 179.0           153.0           17.0 %          1.0 %
@@ -33,6 +33,6 @@ The scenario the reproducer aims to reproduce is,
 4. Run the load test using the gatling setup available in the reproducer
 
    ```shell  
-   mvn -Dgatling.simulationClass=org.paypal.test.LoadTester -Dhost=localhost -Dport=8080 -Dsecure=false -Dduration=300 -Duser=100 gatling:test  
+   mvn -Dgatling.simulationClass=LoadTester -Dhost=localhost -Dport=8080 -Dsecure=false -Dduration=300 -Duser=100 gatling:test  
    ```
 
