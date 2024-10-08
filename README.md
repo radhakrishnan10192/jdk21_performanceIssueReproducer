@@ -36,3 +36,26 @@ The scenario the reproducer aims to reproduce is,
    mvn -Dgatling.simulationClass=LoadTester -Dhost=localhost -Dport=8080 -Dsecure=false -Dduration=300 -Duser=100 gatling:test  
    ```
 
+![From Java 17 and 21 runs with compiler level set](metrics_run_1.png)
+
+Based on this what we can see is the java 17 is getting degraded when we set the compiler level to 4. But jdk 21 does not responds in the same way.
+
+
+
+Based on chat gpt response :
+
+For example, the method _writeStringSegment @ 22 was subject to speculative optimization in Java 21 (log entry 7479 %), which is absent in the Java 17 logs. Java 21 also seems to promote faster deoptimization by marking methods as "not entrant" sooner after these speculative optimizations.
+
+Java 21's JVM seems more aggressive in invalidating methods after profiling changes, likely due to improvements in speculative optimization and deoptimization mechanisms.
+
+This leads to quicker deoptimization of methods when speculative assumptions don’t hold. For example, _writeStringSegment is speculatively optimized but soon marked "not entrant," reflecting an adjustment based on new profiling data
+
+More aggressive speculative optimizations in Java 21, as reflected by the % log entries.
+
+Faster deoptimization in Java 21, where methods are more rapidly marked as "not entrant" after speculative or failed optimizations.
+
+Higher frequency of recompilation in Java 21 for performance-critical methods, likely due to enhanced profiling and feedback mechanisms.
+
+Improved overall performance tuning in Java 21 as seen by the JVM's faster adjustment to runtime execution patterns.
+
+
