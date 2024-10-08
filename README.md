@@ -41,14 +41,7 @@ The scenario the reproducer aims to reproduce is,
 Based on this what we can see is the java 17 is getting degraded when we set the compiler level to 4. But jdk 21 does not responds in the same way.
 
 
-
-Based on chat gpt response :
-
-For example, the method _writeStringSegment @ 22 was subject to speculative optimization in Java 21 (log entry 7479 %), which is absent in the Java 17 logs. Java 21 also seems to promote faster deoptimization by marking methods as "not entrant" sooner after these speculative optimizations.
-
-Java 21's JVM seems more aggressive in invalidating methods after profiling changes, likely due to improvements in speculative optimization and deoptimization mechanisms.
-
-This leads to quicker deoptimization of methods when speculative assumptions don’t hold. For example, _writeStringSegment is speculatively optimized but soon marked "not entrant," reflecting an adjustment based on new profiling data
+*Based on chat gpt response on JIT logs* :
 
 More aggressive speculative optimizations in Java 21, as reflected by the % log entries.
 
